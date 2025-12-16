@@ -1,7 +1,7 @@
 
 # Manifests
 
-``
+```
 kaf manifests/vault-auth-service-account.yaml
 kaf manifests/vault-auth-secret.yaml
 
@@ -10,11 +10,11 @@ kaf manifests/vault-auth-secret.yaml
 kaf manifests/devwebapp.yaml
 kaf manifests/configmap.yaml
 kaf manifests/vault-agent.yaml
-``
+```
 
 # Terraform config
 
-``
+```
 minikube start
 
 export VAULT_ADDR='http://127.0.0.1:8200'
