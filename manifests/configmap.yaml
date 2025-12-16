@@ -13,7 +13,7 @@ data:
         method "kubernetes" {
             mount_path = "auth/kubernetes"
             config = {
-                role = "example"
+                role = "vault-kube-auth-role"
             }
         }
 
@@ -22,6 +22,10 @@ data:
                 path = "/home/vault/.vault-token"
             }
         }
+        
+    }
+    vault {  
+      address = "http://learn-vault:8200"
     }
 
     template {

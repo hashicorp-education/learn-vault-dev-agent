@@ -1,6 +1,11 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
+
+data "external" "get-k8s-host" {
+  program = ["bash", "${path.module}/script.sh"]
+}
+
 # replaces vault-agent-example.yaml
 resource "kubernetes_pod_v1" "vault-agent" {
   metadata {
@@ -11,7 +16,7 @@ resource "kubernetes_pod_v1" "vault-agent" {
     #  }
   }
   spec {
-    service_account_name = kubernetes_service_account.vault-auth.metadata[0].name
+    service_account_name = var.kube_service_name
     volume {
       name = "config"
       config_map {

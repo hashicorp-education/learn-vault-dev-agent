@@ -8,14 +8,19 @@ resource "docker_image" "vault" {
 
 # Start a Vault container in dev mode
 resource "docker_container" "vault" {
-  name  = "learn-vault"
-  image = docker_image.vault.image_id
-#   env = ["VAULT_DEV_ROOT_TOKEN_ID=root", "VAULT_DEV_LISTEN_ADDRESS=0.0.0.0:8200", "VAULT_LICENSE=${var.VAULT_LICENSE}"]
-   env = ["VAULT_DEV_ROOT_TOKEN_ID=root", "VAULT_LICENSE=${var.VAULT_LICENSE}"]
-   network_mode = "host"
+  name         = "learn-vault"
+  image        = docker_image.vault.image_id
+  env          = ["VAULT_DEV_ROOT_TOKEN_ID=root", "VAULT_DEV_LISTEN_ADDRESS=0.0.0.0:8200", "VAULT_LICENSE=${var.VAULT_LICENSE}"]
+  network_mode = "host"
+  networks_advanced {
+    name = "host"
+  }
+  capabilities {
+    add = ["IPC_LOCK"]
+  }
   ports {
     internal = 8200
     external = 8200
-    }
+  }
   rm = true
 }

@@ -6,7 +6,7 @@ resource "kubernetes_secret_v1" "vault-auth-secret" {
   metadata {
     name = "vault-auth-secret"
     annotations = {
-      "kubernetes.io/service-account.name" = kubernetes_service_account.vault-auth.metadata[0].name
+      "kubernetes.io/service-account.name" = kubernetes_service_account_v1.vault-auth.metadata[0].name
     }
   }
   type = "kubernetes.io/service-account-token"

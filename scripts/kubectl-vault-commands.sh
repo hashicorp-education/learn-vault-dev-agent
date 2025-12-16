@@ -1,0 +1,55 @@
+#!/bin/bash
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
+kubectl apply -f manifests/vault-auth-service-account.yaml
+kubectl apply -f manifests/vault-auth-secret.yaml
+sleep 3
+
+# vault commands here
+
+vault policy write myapp-api-key-policy - <<EOF
+path "secret/data/myapp/*" {
+  capabilities = ["read", "list"]
+}
+EOF
+
+vault kv put secret/myapp/api-key \
+  access_key='appuser' \
+  secret_access_key='suP3rsec(et!'
+
+export SA_SECRET_NAME=$(kubectl get secrets --output=json | jq -r '.items[].metadata | select(.name|startswith("vault-auth-")).name')
+
+export SA_JWT_TOKEN=$(kubectl get secret $SA_SECRET_NAME --output 'go-template={{ .data.token }}' | base64 --decode)
+
+export SA_CA_CRT=$(kubectl config view --raw --minify --flatten --output 'jsonpath={.clusters[].cluster.certificate-authority-data}' | base64 --decode)
+
+export K8S_HOST=$(kubectl config view --raw --minify --flatten --output 'jsonpath={.clusters[].cluster.server}')
+
+sleep 3
+
+vault auth enable kubernetes
+
+vault write auth/kubernetes/config \
+     token_reviewer_jwt="$SA_JWT_TOKEN" \
+     kubernetes_host="$K8S_HOST" \
+     kubernetes_ca_cert="$SA_CA_CRT" \
+     issuer="https://kubernetes.default.svc.cluster.local"
+
+vault write auth/kubernetes/role/vault-kube-auth-role \
+     bound_service_account_names=vault-auth \
+     bound_service_account_namespaces=default \
+     token_policies=myapp-api-key-policy \
+     audience=https://kubernetes.default.svc.cluster.local \
+     ttl=24h
+
+export TF_VAR_external_vault_addr=$(minikube ssh "dig +short host.docker.internal" | tr -d '\r')
+
+sleep 3
+
+kubectl apply -f manifests/devwebapp.yaml
+kubectl apply -f manifests/configmap.yaml
+
+sleep 3
+
+kubectl apply -f manifests/vault-agent-example.yaml

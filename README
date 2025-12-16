@@ -1,16 +1,37 @@
 
+# Manifests
+
+``
+kaf manifests/vault-auth-service-account.yaml
+kaf manifests/vault-auth-secret.yaml
+
+# vault commands here
+
+kaf manifests/devwebapp.yaml
+kaf manifests/configmap.yaml
+kaf manifests/vault-agent.yaml
+``
+
+# Terraform config
 
 ``
 minikube start
 
 export VAULT_ADDR='http://127.0.0.1:8200'
-
 export VAULT_TOKEN=root
 
-terraform apply -target=resource.docker_image.vault -target=resource.docker_container.vault
+terraform -chdir=terraform/vault-server/ init && terraform -chdir=terraform/vault-server/ apply -auto-approve
 
-terraform apply -target=resource.kubernetes_service_account.vault-auth -target=resource.kubernetes_cluster_role_binding.role-tokenreview-binding -target=resource.kubernetes_secret_v1.vault-auth-secret -auto-approve
+terraform -chdir=terraform/kubernetes/ init && terraform -chdir=terraform/kubernetes/ apply -auto-approve
 
+eval "$(terraform -chdir=terraform/kubernetes/ output -json ENVIRONMENT_VARIABLES | jq -r ".")"
+
+terraform apply -auto-approve -target=resource.kubernetes_pod_v1.devwebapp -target=resource.kubernetes_config_map_v1.agent-config -target=resource.kubernetes_pod_v1.vault-agent -auto-approve
+```
+
+# vault set up
+
+```
 vault policy write myapp-api-key-policy - <<EOF
 path "secret/data/myapp/*" {
   capabilities = ["read", "list"]
@@ -37,17 +58,15 @@ vault write auth/kubernetes/config \
      kubernetes_ca_cert="$SA_CA_CRT" \
      issuer="https://kubernetes.default.svc.cluster.local"
 
-vault write auth/kubernetes/role/example \
+vault write auth/kubernetes/role/vault-kube-auth-role \
      bound_service_account_names=vault-auth \
      bound_service_account_namespaces=default \
      token_policies=myapp-api-key-policy \
      audience=https://kubernetes.default.svc.cluster.local \
      ttl=24h
 
-vault read auth/kubernetes/role/example
+vault read auth/kubernetes/role/vault-kube-auth-role
 vault read auth/kubernetes/config
 
 export TF_VAR_external_vault_addr=$(minikube ssh "dig +short host.docker.internal" | tr -d '\r')
-
-terraform apply -auto-approve -target=resource.kubernetes_pod_v1.devwebapp -target=resource.kubernetes_config_map_v1.agent-config -target=resource.kubernetes_pod_v1.vault-agent
 ```

@@ -10,7 +10,7 @@ resource "kubernetes_pod_v1" "devwebapp" {
     }
   }
   spec {
-    service_account_name = kubernetes_service_account.vault-auth.metadata[0].name
+    service_account_name = var.kube_service_name
     container {
       image = "burtlo/devwebapp-ruby:k8s"
       name  = "devwebapp-pod"

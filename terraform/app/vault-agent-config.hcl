@@ -10,7 +10,7 @@ auto_auth {
    method "kubernetes" {
       mount_path = "auth/kubernetes"
       config = {
-            role = "example"
+            role = "vault-kube-auth-role"
       }
    }
 

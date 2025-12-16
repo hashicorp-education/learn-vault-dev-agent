@@ -2,13 +2,13 @@
 # SPDX-License-Identifier: MPL-2.0
 
 # replaces vault-auth-service-account.yaml
-resource "kubernetes_service_account" "vault-auth" {
+resource "kubernetes_service_account_v1" "vault-auth" {
   metadata {
     name = "vault-auth"
   }
 }
 
-resource "kubernetes_cluster_role_binding" "role-tokenreview-binding" {
+resource "kubernetes_cluster_role_binding_v1" "role-tokenreview-binding" {
   metadata {
     name = "role-tokenreview-binding"
   }
@@ -19,7 +19,7 @@ resource "kubernetes_cluster_role_binding" "role-tokenreview-binding" {
   }
   subject {
     kind      = "ServiceAccount"
-    name      = "vault-auth"
+    name      = kubernetes_service_account_v1.vault-auth.metadata[0].name
     namespace = "default"
   }
 }
