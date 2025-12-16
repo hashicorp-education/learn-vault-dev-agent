@@ -3,8 +3,8 @@
 # SPDX-License-Identifier: MPL-2.0
 
 set -e
-
-external_vault_addr=$(minikube ssh "dig +short host.docker.internal" | tr -d '\r')
+# host.docker.internal connects back to the host machine from within docker/minikube
+external_vault_addr=$(minikube ssh "dig +short host.docker.internal" | tr -d '\r{}')
 
 # Safely produce a JSON object containing the result value.
 # jq will ensure that the value is properly quoted

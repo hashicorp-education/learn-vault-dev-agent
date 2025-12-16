@@ -16,7 +16,7 @@ resource "kubernetes_pod_v1" "devwebapp" {
       name  = "devwebapp-pod"
       env {
         name  = "VAULT_ADDR"
-        value = "http://${var.external_vault_addr}:8200"
+        value = "http://${data.external.get-k8s-host.result["EXTERNAL_VAULT_ADDR"]}:8200"
       }
     }
   }

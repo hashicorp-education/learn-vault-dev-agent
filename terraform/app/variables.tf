@@ -6,7 +6,7 @@ variable "kube_service_name" {
   default     = "vault-auth"
 }
 
-variable "external_vault_addr" {
-  description = "External Vault address for Vault Agent to connect to"
-  type        = string
-}
+# variable "external_vault_addr" {
+#   description = "External Vault address for Vault Agent to connect to"
+#   type        = string
+# }
