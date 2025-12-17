@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: MPL-2.0
 
 # replaces vault-auth-secret.yaml
+# get the token and ca.crt for the vault-auth service account
 resource "kubernetes_secret_v1" "vault-auth-secret" {
   metadata {
     name = "vault-auth-secret"
