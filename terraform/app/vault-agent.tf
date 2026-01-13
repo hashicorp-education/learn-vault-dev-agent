@@ -1,9 +1,9 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
-data "external" "get-k8s-host" {
-  program = ["bash", "${path.module}/script.sh"]
-}
+# data "external" "get-k8s-host" {
+#   program = ["bash", "${path.module}/script.sh"]
+# }
 
 # replaces vault-agent-example.yaml
 resource "kubernetes_pod_v1" "vault-agent" {
@@ -38,7 +38,7 @@ resource "kubernetes_pod_v1" "vault-agent" {
       ]
       env {
         name = "VAULT_ADDR"
-        value = "http://${data.external.get-k8s-host.result["EXTERNAL_VAULT_ADDR"]}:8200"
+        value = local.external_vault_addr
       }
       volume_mount {
         name       = "config"

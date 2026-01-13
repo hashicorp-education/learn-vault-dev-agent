@@ -25,7 +25,7 @@ data:
         
     }
     vault {  
-      address = "http://learn-vault:8200"
+      address = "http://192.168.65.254:8200"
     }
 
     template {
