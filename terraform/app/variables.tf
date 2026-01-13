@@ -5,17 +5,26 @@ data "external" "get-k8s-host" {
   program = ["bash", "${path.module}/script.sh"]
 }
 
-variable "external_vault_addr" {
+variable "EXTERNAL_VAULT_ADDR" {
  description = "External Vault address for Vault Agent to connect to"
   type        = string
   default     = ""
 }
 
 locals {
-   external_vault_addr = var.external_vault_addr != "" ? var.external_vault_addr : "http://${data.external.get-k8s-host.result["EXTERNAL_VAULT_ADDR"]}:8200"
+   external_vault_addr = var.EXTERNAL_VAULT_ADDR != "" ? var.EXTERNAL_VAULT_ADDR : "http://${data.external.get-k8s-host.result["EXTERNAL_VAULT_ADDR"]}:8200"
 } 
 
 variable "kube_service_name" {
   description = "service name used by agent to access vault"
   default     = "vault-auth"
+}
+
+output "external_vault_addr_raw" {
+   description = "External Vault address for Vault Agent to connect to"
+   value       = var.EXTERNAL_VAULT_ADDR
+}
+
+output "local_external" {
+  value = local.external_vault_addr
 }
