@@ -4,6 +4,7 @@
 
 kubectl apply -f manifests/vault-auth-service-account.yaml
 kubectl apply -f manifests/vault-auth-secret.yaml
+
 sleep 3
 
 # vault commands here
@@ -46,10 +47,13 @@ vault write auth/kubernetes/role/vault-kube-auth-role \
 export TF_VAR_external_vault_addr=$(minikube ssh "dig +short host.docker.internal" | tr -d '\r')
 
 sleep 3
+kubectl apply -f manifests/external-vault-service.yaml
+
+sleep 3
 
 kubectl apply -f manifests/devwebapp.yaml
 kubectl apply -f manifests/configmap.yaml
 
 sleep 3
 
-kubectl apply -f manifests/vault-agent-example.yaml
+kubectl apply -f manifests/vault-agent.yaml

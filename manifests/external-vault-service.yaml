@@ -23,7 +23,7 @@ metadata:
 addressType: IPv4
 endpoints:
   - addresses:
-    - "192.168.65.254"
+    - 0.0.0.1
 ports: 
     - name: http
       port: 8200
