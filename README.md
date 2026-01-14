@@ -7,6 +7,7 @@ kaf manifests/vault-auth-secret.yaml
 
 # vault commands here
 
+kaf manifests/external-vault-service.yaml
 kaf manifests/devwebapp.yaml
 kaf manifests/configmap.yaml
 kaf manifests/vault-agent.yaml

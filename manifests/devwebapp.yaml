@@ -14,4 +14,4 @@ spec:
       image: burtlo/devwebapp-ruby:k8s
       env:
         - name: VAULT_ADDR
-          value: "http://192.168.65.254:8200"
+          value: "http://external-vault:8200"

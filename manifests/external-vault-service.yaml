@@ -4,20 +4,26 @@ kind: Service
 metadata:
   name: external-vault
   namespace: default
+  labels:
+    run: external-vault
 spec:
   ports:
-  - protocol: TCP
+  - name: http
     port: 8200
+    targetPort: http
+  selector:
+    run: external-vault
 ---
 apiVersion: discovery.k8s.io/v1
 kind: EndpointSlice
 metadata:
   name: external-vault
+  labels:
+    kubernetes.io/service-name: external-vault
 addressType: IPv4
 endpoints:
   - addresses:
-    - 192.168.65.254
-ports:
-  - port: 8200
-    protocol: TCP
-    name: http
+    - "192.168.65.254"
+ports: 
+    - name: http
+      port: 8200
