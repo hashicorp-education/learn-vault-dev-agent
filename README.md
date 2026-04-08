@@ -1,5 +1,8 @@
+# READ ME
 
-# Manifests
+## Vault AGENT
+
+### Manifests
 
 ```
 kaf manifests/vault-auth-service-account.yaml
@@ -13,7 +16,7 @@ kaf manifests/configmap.yaml
 kaf manifests/vault-agent.yaml
 ```
 
-# Terraform config
+### Terraform config
 
 ```
 minikube start
@@ -30,7 +33,7 @@ eval "$(terraform -chdir=terraform/kubernetes/ output -json ENVIRONMENT_VARIABLE
 terraform apply -auto-approve -target=resource.kubernetes_pod_v1.devwebapp -target=resource.kubernetes_config_map_v1.agent-config -target=resource.kubernetes_pod_v1.vault-agent -auto-approve
 ```
 
-# vault set up
+### vault set up
 
 ```
 vault policy write myapp-api-key-policy - <<EOF
@@ -70,4 +73,16 @@ vault read auth/kubernetes/role/vault-kube-auth-role
 vault read auth/kubernetes/config
 
 export TF_VAR_external_vault_addr=$(minikube ssh "dig +short host.docker.internal" | tr -d '\r')
+```
+
+### Vault SDK
+
+### Manifests
+
+```
+kaf manifests/vault-auth-service-account.yaml
+kaf manifests/vault-auth-secret.yaml
+
+# vault commands here
+
 ```
