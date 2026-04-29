@@ -30,11 +30,11 @@ resource "kubernetes_pod_v1" "vault-agent" {
 
     init_container {
       name  = "vault-agent"
-      image = "hashicorp/vault"
+      image = "hashicorp/vault:1.21"
       args = [
         "agent",
         "-config=/etc/vault/vault-agent-config.hcl",
-        "-log-level=debug"
+        "-log-level=debug" 
       ]
       env {
         name = "VAULT_ADDR"

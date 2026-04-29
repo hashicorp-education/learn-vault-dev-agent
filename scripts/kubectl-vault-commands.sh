@@ -17,7 +17,7 @@ EOF
 
 vault kv put secret/myapp/api-key \
   access_key='appuser' \
-  secret_access_key='suP3rsec(et!'
+  secret_access_key='Su4t9mBFykMW29LLHsGH5g=='
 
 export SA_SECRET_NAME=$(kubectl get secrets --output=json | jq -r '.items[].metadata | select(.name|startswith("vault-auth-")).name')
 

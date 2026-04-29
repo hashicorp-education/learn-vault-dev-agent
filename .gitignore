@@ -13,6 +13,7 @@ themes/**
 **.git
 logs/**
 junk/**
+.agents/**
 
 ## terraform files
 *.tfstate

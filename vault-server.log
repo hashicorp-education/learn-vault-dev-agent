@@ -1,0 +1,95 @@
+==> Vault server configuration:
+
+Administrative Namespace: 
+             Api Address: http://127.0.0.1:8200
+                     Cgo: disabled
+         Cluster Address: https://127.0.0.1:8201
+   Environment Variables: CDPATH, COLORFGBG, COLORTERM, COMMAND_MODE, DEFAULT_ARCH, DEFAULT_USER, DOCKER_HOST, DOTFILES, FPATH, FZF_DEFAULT_COMMAND, FZF_DEFAULT_OPTS, GITHUB, GIT_BRANCH, GOBIN, GOPATH, GUILE_LOAD_COMPILED_PATH, GUILE_LOAD_PATH, GUILE_SYSTEM_EXTENSIONS_PATH, HISTSIZE, HOME, HOMEBREW_AUTO_UPDATE_SECS, HOMEBREW_CELLAR, HOMEBREW_NO_ANALYTICS, HOMEBREW_PREFIX, HOMEBREW_REPOSITORY, INFOPATH, INSTRUQT_REPORT_CRASHES, INSTRUQT_TELEMETRY, ITERM_PROFILE, ITERM_SESSION_ID, LANG, LC_TERMINAL, LC_TERMINAL_VERSION, LESS, LOGNAME, LSCOLORS, OSLogRateLimit, PAGER, PATH, PWD, SAVEHIST, SHELL, SHLVL, SKEW_CONFIG, SSH_AUTH_SOCK, TERM, TERMINFO_DIRS, TERM_FEATURES, TERM_PROGRAM, TERM_PROGRAM_VERSION, TERM_SESSION_ID, TF_CLI_CONFIG_FILE, TF_PLUGIN_CACHE_DIR, TMPDIR, USER, VAULT_ADDR, VAULT_TOKEN, XPC_FLAGS, XPC_SERVICE_NAME, ZSH, ZSH_PLUGINS_ALIAS_TIPS_TEXT, _, __CFBundleIdentifier, __CF_USER_TEXT_ENCODING
+              Go Version: go1.25.7
+              Listener 1: tcp (addr: "127.0.0.1:8200", cluster address: "127.0.0.1:8201", disable_request_limiter: "false", max_json_array_element_count: "10000", max_json_depth: "300", max_json_object_entry_count: "10000", max_json_string_value_length: "1048576", max_request_duration: "1m30s", max_request_size: "33554432", tls: "disabled")
+               Log Level: 
+                   Mlock: supported: false, enabled: false
+           Recovery Mode: false
+                 Storage: inmem
+                 Version: Vault v1.21.4, built 2026-03-04T17:40:05Z
+             Version Sha: ffe7023c481dc1ea2d8550bbaca8d85f8e611e0b
+
+==> Vault server started! Log data will stream in below:
+
+2026-04-29T09:06:07.128-0500 [INFO]  proxy environment: http_proxy="" https_proxy="" no_proxy=""
+2026-04-29T09:06:07.132-0500 [INFO]  incrementing seal generation: generation=1
+2026-04-29T09:06:07.132-0500 [WARN]  no `api_addr` value specified in config or in VAULT_API_ADDR; falling back to detection if possible, but this value should be manually set
+2026-04-29T09:06:07.139-0500 [INFO]  core: Initializing version history cache for core
+2026-04-29T09:06:07.139-0500 [INFO]  events: Starting event system
+2026-04-29T09:06:07.141-0500 [INFO]  core: security barrier not initialized
+2026-04-29T09:06:07.142-0500 [INFO]  core: security barrier initialized: stored=1 shares=1 threshold=1
+2026-04-29T09:06:07.145-0500 [INFO]  core: post-unseal setup starting
+2026-04-29T09:06:07.160-0500 [INFO]  core: loaded wrapping token key
+2026-04-29T09:06:07.160-0500 [INFO]  core: successfully setup plugin runtime catalog
+2026-04-29T09:06:07.160-0500 [INFO]  core: successfully setup plugin catalog: plugin-directory=""
+2026-04-29T09:06:07.160-0500 [INFO]  core: no mounts; adding default mount table
+2026-04-29T09:06:07.163-0500 [INFO]  core: successfully mounted: type=cubbyhole version="v1.21.4+builtin.vault" path=cubbyhole/ namespace="ID: root. Path: "
+2026-04-29T09:06:07.165-0500 [INFO]  core: successfully mounted: type=system version="v1.21.4+builtin.vault" path=sys/ namespace="ID: root. Path: "
+2026-04-29T09:06:07.167-0500 [INFO]  core: successfully mounted: type=identity version="v1.21.4+builtin.vault" path=identity/ namespace="ID: root. Path: "
+2026-04-29T09:06:07.168-0500 [INFO]  core: successfully mounted: type=token version="v1.21.4+builtin.vault" path=token/ namespace="ID: root. Path: "
+2026-04-29T09:06:07.168-0500 [INFO]  rollback: Starting the rollback manager with 256 workers
+2026-04-29T09:06:07.168-0500 [INFO]  rollback: starting rollback manager
+2026-04-29T09:06:07.169-0500 [INFO]  core: restoring leases
+2026-04-29T09:06:07.169-0500 [INFO]  expiration: lease restore complete
+2026-04-29T09:06:07.170-0500 [INFO]  identity: entities restored
+2026-04-29T09:06:07.170-0500 [INFO]  identity: groups restored
+2026-04-29T09:06:07.171-0500 [INFO]  core: Recorded vault version: vault version=1.21.4 upgrade time="2026-04-29 14:06:07.170986 +0000 UTC" build date=2026-03-04T17:40:05Z
+2026-04-29T09:06:07.171-0500 [INFO]  core: post-unseal setup complete
+2026-04-29T09:06:07.172-0500 [INFO]  core: root token generated
+2026-04-29T09:06:07.172-0500 [INFO]  core: pre-seal teardown starting
+2026-04-29T09:06:07.172-0500 [INFO]  rollback: stopping rollback manager
+2026-04-29T09:06:07.172-0500 [INFO]  core: pre-seal teardown complete
+2026-04-29T09:06:07.172-0500 [INFO]  core.cluster-listener.tcp: starting listener: listener_address=127.0.0.1:8201
+2026-04-29T09:06:07.172-0500 [INFO]  core.cluster-listener: serving cluster requests: cluster_listen_address=127.0.0.1:8201
+2026-04-29T09:06:07.172-0500 [INFO]  core: post-unseal setup starting
+2026-04-29T09:06:07.172-0500 [INFO]  core: loaded wrapping token key
+2026-04-29T09:06:07.172-0500 [INFO]  core: successfully setup plugin runtime catalog
+2026-04-29T09:06:07.172-0500 [INFO]  core: successfully setup plugin catalog: plugin-directory=""
+2026-04-29T09:06:07.173-0500 [INFO]  core: successfully mounted: type=system version="v1.21.4+builtin.vault" path=sys/ namespace="ID: root. Path: "
+2026-04-29T09:06:07.173-0500 [INFO]  core: successfully mounted: type=identity version="v1.21.4+builtin.vault" path=identity/ namespace="ID: root. Path: "
+2026-04-29T09:06:07.174-0500 [INFO]  core: successfully mounted: type=cubbyhole version="v1.21.4+builtin.vault" path=cubbyhole/ namespace="ID: root. Path: "
+2026-04-29T09:06:07.174-0500 [INFO]  core: successfully mounted: type=token version="v1.21.4+builtin.vault" path=token/ namespace="ID: root. Path: "
+2026-04-29T09:06:07.174-0500 [INFO]  rollback: Starting the rollback manager with 256 workers
+2026-04-29T09:06:07.174-0500 [INFO]  rollback: starting rollback manager
+2026-04-29T09:06:07.174-0500 [INFO]  core: restoring leases
+2026-04-29T09:06:07.174-0500 [INFO]  identity: entities restored
+2026-04-29T09:06:07.174-0500 [INFO]  identity: groups restored
+2026-04-29T09:06:07.174-0500 [INFO]  expiration: lease restore complete
+2026-04-29T09:06:07.174-0500 [INFO]  core: post-unseal setup complete
+2026-04-29T09:06:07.174-0500 [INFO]  core: vault is unsealed
+2026-04-29T09:06:07.177-0500 [INFO]  expiration: revoked lease: lease_id=auth/token/root/h263b43d8f29504031fc2873fec2ecd12d60f338233ec81af672a19a4f149c85e
+2026-04-29T09:06:07.184-0500 [INFO]  core: successful mount: namespace="" path=secret/ type=kv version="v0.25.0+builtin"
+WARNING! dev mode is enabled! In this mode, Vault runs entirely in-memory
+and starts unsealed with a single unseal key. The root token is already
+authenticated to the CLI, so you can immediately begin using Vault.
+
+You may need to set the following environment variables:
+
+    $ export VAULT_ADDR='http://127.0.0.1:8200'
+
+The unseal key and root token are displayed below in case you want to
+seal/unseal the Vault or re-authenticate.
+
+Unseal Key: Y7JalrDjVmwZuXtbjgHQF8bSSpoBuMgidD6/5rezlAc=
+Root Token: root
+
+Development mode should NOT be used in production installations!
+
+2026-04-29T09:08:45.777-0500 [INFO]  core: enabled credential backend: path=kubernetes/ type=kubernetes version="v0.23.1+builtin"
+2026-04-29T09:22:01.090-0500 [INFO]  expiration: revoked lease: lease_id=auth/kubernetes/login/h7872a8694ee8285d2055ae336ecfd635948e9e1898ed0d4982476150b31732eb
+2026-04-29T09:22:01.092-0500 [INFO]  core: disabled credential backend: path=auth/kubernetes/
+==> Vault shutdown triggered
+2026-04-29T09:22:16.287-0500 [INFO]  core: marked as sealed
+2026-04-29T09:22:16.291-0500 [INFO]  core: pre-seal teardown starting
+2026-04-29T09:22:16.293-0500 [INFO]  rollback: stopping rollback manager
+2026-04-29T09:22:16.297-0500 [INFO]  core: pre-seal teardown complete
+2026-04-29T09:22:16.297-0500 [INFO]  core: stopping cluster listeners
+2026-04-29T09:22:16.297-0500 [INFO]  core.cluster-listener: forwarding rpc listeners stopped
+2026-04-29T09:22:16.566-0500 [INFO]  core.cluster-listener: rpc listeners successfully shut down
+2026-04-29T09:22:16.566-0500 [INFO]  core: cluster listeners successfully shut down
+2026-04-29T09:22:16.566-0500 [INFO]  core: vault is sealed
